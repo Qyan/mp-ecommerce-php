@@ -1,4 +1,27 @@
 <!DOCTYPE html>
+
+
+<?php
+// SDK de Mercado Pago
+require __DIR__ .  '/vendor/autoload.php';
+
+// Agrega credenciales
+MercadoPago\SDK::setAccessToken('TEST-1829948992436035-103106-f61a612813d7d09a46eeced37042b5f8-256388610');
+
+// Crea un objeto de preferencia
+$preference = new MercadoPago\Preference();
+
+// Crea un ítem en la preferencia
+$item = new MercadoPago\Item();
+$item->title = 'Mi producto';
+$item->quantity = 1;
+$item->unit_price = 75.56;
+$preference->items = array($item);
+$preference->save();
+?>
+
+
+
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=1024">
@@ -12,13 +35,13 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="./assets/category-landing.css" media="screen, print">
+    <link rel="stylesheet" href="./assets/css/category-landing.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/category.css" media="screen, print">
+    <link rel="stylesheet" href="./assets/css/category.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/merch-tools.css" media="screen, print">
+    <link rel="stylesheet" href="./assets/css/merch-tools.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/fonts" media="">
+    <link rel="stylesheet" href="./assets/fonts/fonts" media="">
     <style>
         .as-filter-button-text {
             font-size: 26px;
@@ -52,7 +75,7 @@
                         <div class="pd-billboard pd-category-header">
                             <div class="pd-l-plate-scale">
                                 <div class="pd-billboard-background">
-                                    <img src="./assets/music-audio-alp-201709" alt="" width="1440" height="320" data-scale-params-2="wid=2880&amp;hei=640&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1503948581306" class="pd-billboard-hero ir">
+                                    <img src="./assets/img/music-audio-alp-201709.jpg" alt="" width="1440" height="320" data-scale-params-2="wid=2880&amp;hei=640&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1503948581306" class="pd-billboard-hero ir">
                                 </div>
                                 <div class="pd-billboard-info">
                                     <h1 class="pd-billboard-header pd-util-compact-small-18">Tienda e-commerce</h1>
@@ -100,7 +123,7 @@
                                             <div class="clearfix image-list xs-no-js as-util-relatedlink relatedlink" data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
                                                 <div class="as-tilegallery-element as-image-selected">
                                                     <div class=""></div>
-                                                    <img src="./assets/003.jpg" class="ir ir item-image as-producttile-image" alt="" width="445" height="445" style="content:-webkit-image-set(url(<?php echo $_POST['img'] ?>) 2x);">
+                                                    <img src="<?php echo $_POST['img'] ?>" class="ir ir item-image as-producttile-image" alt="" width="250" style="content:-webkit-image-set(url(<?php echo $_POST['img'] ?>) 2x);">
                                                 </div>
                                                 
                                             </div>
@@ -130,7 +153,10 @@
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                                    <script
+                                      src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+                                      data-preference-id="<?php echo $preference->id; ?>">
+                                    </script>
                                 </div>
                             </div>
                         </div>
